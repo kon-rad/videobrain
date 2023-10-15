@@ -35,6 +35,7 @@ export default async function createMessage(
 
     res.status(200).json(response.data);
   } catch (error) {
+    console.log("error", error);
     console.error(
       "Error:",
       error.response ? error.response.data : error.message

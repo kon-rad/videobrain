@@ -10,7 +10,9 @@ const CreateSpace: NextPage = () => {
   const [video, setVideo] = useState({ data: null, isLoading: true });
   const INDEX_ID = process.env.NEXT_PUBLIC_INDEX_ID;
 
-  const [youtubeUrlValue, setYoutubeUrlValue] = useState("");
+  const [youtubeUrlValue, setYoutubeUrlValue] = useState(
+    "https://www.youtube.com/watch?v=eFTHIBYFEUg&ab_channel=SiliconValleyGirl"
+  );
   const { user, loading } = useAuth();
 
   const handleYoutubeUrlValue = (e) => {
@@ -38,7 +40,7 @@ const CreateSpace: NextPage = () => {
   }, []);
 
   if (loading) return <h1>Loading...</h1>;
-  if (!user) return <h1>U need to login</h1>;
+  if (!user) return <h1>Login or Sign up!</h1>;
 
   // if (video.isLoading) {
   //   return <p>Loading...</p>;
@@ -65,6 +67,18 @@ const CreateSpace: NextPage = () => {
         </div>
         <button className="my-4 py-1 px-6 bg-yellow-500 border rounded w-24">
           create
+        </button>
+        <div className="max-w-md flex flex-col">
+          <label className="text-lg py-4">Search Video Library</label>
+          <input
+            type="text"
+            value={""}
+            onChange={() => {}}
+            className="py-2 px-6 border border-rounded"
+          ></input>
+        </div>
+        <button className="my-4 py-1 px-6 bg-yellow-500 border rounded w-24">
+          search
         </button>
         <VideoContents video={video} />
       </main>

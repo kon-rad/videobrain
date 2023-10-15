@@ -19,10 +19,12 @@ export default async function handler(
 
   try {
     // Call the chat completion API
-    const chatCompletion = await openai.createChatCompletion({
-      messages: [{ role: "user", content: message }],
-      model: "pulze-v0",
-    });
+    // const chatCompletion = await openai.createChatCompletion({
+    //   messages: [{ role: "user", content: message }],
+    //   model: "pulze-v0",
+    // });
+    // console.log("chatCompletion: ", chatCompletion)
+    console.log("fail: ");
 
     // Return the chat completion response
     res.status(200).json(chatCompletion.data);

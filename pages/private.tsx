@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   const { user, loading } = useAuth();
 
   if (loading) return <h1>Loading...</h1>;
-  if (!user) return <h1>U need to login</h1>;
+  if (!user) return <h1>Login or Sign up!</h1>;
 
   return (
     <>

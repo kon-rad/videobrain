@@ -16,7 +16,7 @@ const Home: NextPage = ({
   user?: TIdTokenResult;
   children?: ReactNode;
 }) => {
-  if (!user) return <h1>U need to login</h1>;
+  if (!user) return <h1>Login or Sign up!</h1>;
 
   return (
     <>

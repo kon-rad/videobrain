@@ -16,7 +16,7 @@ const Home: NextPage = () => {
 
   if (loading) return null;
 
-  if (user) return <h1>U already logged</h1>;
+  if (user) return <h1>Welcome! You are logged in!d</h1>;
 
   const auth = getAuth();
 

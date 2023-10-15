@@ -101,7 +101,7 @@ const MessagesList = () => {
           >
             {!isUser && (
               <img
-                src="/assets/images/robot-icon.png"
+                src="/assets/images/logo.png"
                 className="w-9 h-9 rounded-full"
                 alt="avatar"
               />
@@ -121,7 +121,7 @@ const MessagesList = () => {
             </div>
             {isUser && (
               <img
-                src="/assets/images/logo.png"
+                src="/assets/images/ai-avatar-1.JPG"
                 className="w-9 h-9 rounded-full cursor-pointer"
                 alt="avatar"
               />
@@ -132,7 +132,7 @@ const MessagesList = () => {
       {isLoadingAnswer && (
         <div className="flex justify-start mb-4">
           <img
-            src="/assets/images/robot-icon.png"
+            src="/assets/images/logo.png"
             className="w-9 h-9 rounded-full"
             alt="avatar"
           />
