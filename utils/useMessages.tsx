@@ -49,14 +49,17 @@ export function MessagesProvider({ children }: { children: ReactNode }) {
         role: "user",
         content,
       };
+      console.log("sending  message: ", content)
       const newMessages = [...messages, newMessage];
+      // const newMessages = [newMessage];
 
       // Add the user message to the state so we can see it immediately
       setMessages(newMessages);
 
-      const { data } = await sendMessage(newMessages);
+      const { data } = await sendMessage(newMessage);
       const reply = data.choices[0].message;
 
+      console.log(":reply ", reply)
       // Add the assistant message to the state
       setMessages([...newMessages, reply]);
     } catch (error) {

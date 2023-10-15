@@ -20,7 +20,7 @@ export default function Header(props: any) {
         </Link>
       </div>
 
-      <div className="m-auto space-x-2">
+      <div className="m-auto space-x-6">
         {!user && !loading ? (
           <>
             <Link passHref href="/signup">
@@ -35,14 +35,14 @@ export default function Header(props: any) {
         {user ? (
           <>
             <Link href="/space/video" className="mx-4">
-              <button>search</button>
+              <button>Search</button>
             </Link>
             <Link href="/space/create" className="mx-4">
               <button>Create Space</button>
             </Link>
 
             <Link href="/space/list" className="mx-4">
-              <button>spaces</button>
+              <button>Spaces</button>
             </Link>
 
             <button onClick={signOut}> Signout</button>

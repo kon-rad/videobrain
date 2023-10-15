@@ -1,51 +1,44 @@
 import { NextApiRequest, NextApiResponse } from "next";
-// import { Configuration, OpenAIApi } from "openai";
-import { Configuration, OpenAIAPI } from "openai"
+import axios from "axios";
+import { Configuration, OpenAIApi } from "openai";
+
 export default async function createMessage(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   const { messages } = req.body;
-  // const apiKey = process.env.NEXT_PUBLIC_PULZE_API_KEY;
-  // const url = "https://api.pulze.ai/v1/completions/";
 
-  // Create a new instance of the OpenAI Configuration
-  const configuration = new Configuration({
-    apiKey: process.env.NEXT_PUBLIC_PULZE_API_KEY,
-    basePath: "https://api.pulze.ai/v1", // enter Pulze's URL
-  });
+  // Define your API key and other parameters
+  const PULZE_API_KEY = process.env.NEXT_PUBLIC_PULZE_API_KEY;
+  const apiUrl = "https://api.pulze.ai/v1/completions/";
 
-  // Create a new instance of the OpenAI API
-  const openai = new OpenAIApi(configuration);
+  // Define the request headers and data
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${PULZE_API_KEY}`,
+    "Pulze-Labels": JSON.stringify({ hello: "world" }),
+  };
 
-  // const body = JSON.stringify({
-  //   messages,
-  //   model: "pulze-v0",
-  //   stream: false,
-  // });
+  const data = {
+    model: "pulze-v0",
+    prompt: JSON.stringify(messages),
+    // prompt: messages,
+    max_tokens: 1000,
+    temperature: 0.7,
+  };
+  console.log("request: ", data);
 
+  // Make the HTTP request
   try {
-    // const response = await fetch(url, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${apiKey}`,
-    //   },
-    //   body,
-    // });
-    // const data = await response.json();
-    // console.log("createmessage response: ", data);
-    // res.status(200).json({ data });
+    const response = await axios.post(apiUrl, data, { headers });
+    console.log("Response:", response.data);
 
-    // Call the chat completion API
-    const chatCompletion = await openai.createChatCompletion({
-      messages: [{ role: "user", content: messages }],
-      model: "pulze-v0",
-    });
-    console.log("inside create message chatCompletion", chatCompletion);
-
-    res.status(200).json(chatCompletion.data);
+    res.status(200).json(response.data);
   } catch (error) {
+    console.error(
+      "Error:",
+      error.response ? error.response.data : error.message
+    );
     res.status(500).json({ error: error.message });
   }
 }
