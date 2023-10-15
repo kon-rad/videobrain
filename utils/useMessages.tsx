@@ -30,7 +30,7 @@ export function MessagesProvider({ children }: { children: ReactNode }) {
       };
       const welcomeMessage: ChatCompletionRequestMessage = {
         role: "assistant",
-        content: "Hi, How can I help you today?",
+        content: "I am the Ai Engineer Summit Video Brain. ask me anything!",
       };
       setMessages([systemMessage, welcomeMessage]);
     };
@@ -49,19 +49,21 @@ export function MessagesProvider({ children }: { children: ReactNode }) {
         role: "user",
         content,
       };
-      console.log("sending  message: ", content)
+      console.log("sending  message: ", content);
       const newMessages = [...messages, newMessage];
       // const newMessages = [newMessage];
 
       // Add the user message to the state so we can see it immediately
       setMessages(newMessages);
 
-      const { data } = await sendMessage(newMessage);
-      const reply = data.choices[0].message;
+      const data = await sendMessage(newMessage);
+      console.log("landed data", data);
 
-      console.log(":reply ", reply)
+      const reply = data.choices[0].text;
+
+      console.log(":reply ", reply);
       // Add the assistant message to the state
-      setMessages([...newMessages, reply]);
+      setMessages([...newMessages, { content: reply, role: "assistant" }]);
     } catch (error) {
       // Show error when something goes wrong
       addToast({ title: "An error occurred", type: "error" });
