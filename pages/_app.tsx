@@ -6,11 +6,13 @@ import "../lib/firebaseConfig/init";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <FirebaseProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </FirebaseProvider>
+    <div className="bg-gray-100">
+      <FirebaseProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </FirebaseProvider>
+    </div>
   );
 }
 export default MyApp;

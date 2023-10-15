@@ -32,7 +32,6 @@ export function VideoContents({ video }) {
     result: "",
   });
 
-
   const vidTitleRaw = video?.data?.metadata.video_title;
   const vidTitleClean = decodeAndCleanFilename(vidTitleRaw);
 
@@ -46,7 +45,7 @@ export function VideoContents({ video }) {
 
   return (
     <div className="VideoContents">
-      <h1 className="appTitle">Summarize a Youtube Video</h1>
+      <h1 className="appTitle">Search and Summarize Video</h1>
       {video.data ? <Video video={video} /> : <p>Please Upload a video</p>}
       {field1Result.result?.length > 0 ||
       field2Result.result?.length > 0 ||
