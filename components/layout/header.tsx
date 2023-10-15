@@ -8,7 +8,15 @@ export default function Header(props: any) {
     <div className="flex h-full flex-row">
       <div className="flex-1 my-auto">
         <Link href="/">
-          <button>Home</button>
+          <div className="flex flex-row rounded">
+            <img
+              src="/assets/images/logo.png"
+              alt="Logo"
+              width="60px"
+              height="60px"
+              className="rounded-xl"
+            />
+          </div>
         </Link>
       </div>
 
@@ -26,12 +34,15 @@ export default function Header(props: any) {
         ) : null}
         {user ? (
           <>
-            <Link href="/privatessr">
-              <button> PrivateSSR</button>
+            <Link href="/space/video" className="mx-4">
+              <button>search</button>
+            </Link>
+            <Link href="/space/create" className="mx-4">
+              <button>Create Space</button>
             </Link>
 
-            <Link href="/private">
-              <button> Private</button>
+            <Link href="/space/list" className="mx-4">
+              <button>spaces</button>
             </Link>
 
             <button onClick={signOut}> Signout</button>

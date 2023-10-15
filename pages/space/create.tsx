@@ -2,6 +2,7 @@ import React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useAuth } from "../../lib/authContext";
+import ModalComponent from "../../components/ModalComponent";
 import { useState } from "react";
 import { getChannelVideos } from "../../lib/youtube/helpers";
 import axios from "axios";
@@ -36,7 +37,7 @@ const CreateSpace: NextPage = () => {
     try {
       const response = await axios.post("/api/videoIds", { videoIds });
       console.log("Response:", response.data.data);
-      return response.data.data;
+      return response.data.data.map((item) => item[0]);
     } catch (error) {
       // Handle error
       if (error.response) {
@@ -77,12 +78,15 @@ const CreateSpace: NextPage = () => {
             className="py-2 px-6 border border-rounded"
           ></input>
         </div>
-        <button
-          className="my-4 py-1 px-6 bg-yellow-500 border rounded w-24"
-          onClick={handleImport}
-        >
-          create
-        </button>
+        <div className="my-2">
+          <button
+            className="bg-yellow-100 text-black active:bg-yellow-400 
+          font-bold px-2 py-0 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 my-2"
+            onClick={handleImport}
+          >
+            get videos
+          </button>
+        </div>
       </main>
       <div className="flex flex-wrap my-4 p-4 border rounded-md">
         {videoResults.map((vid: any, i: number) => {
@@ -99,7 +103,17 @@ const CreateSpace: NextPage = () => {
                 alt="youtube thumbnail"
                 className="my-2 mx-3 rounded-md"
               />
-              <p className="p-2 text-xs">hello</p>
+              <ModalComponent
+                body={transcripts[i]?.pageContent}
+                openButtonLabel="transcript"
+                title={"transcripts"}
+              />
+              <button
+                className="bg-green-100 text-black active:bg-green-400 
+      font-bold px-2 py-0 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 my-2"
+              >
+                upload
+              </button>
             </div>
           );
         })}

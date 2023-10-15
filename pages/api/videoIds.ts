@@ -1,8 +1,29 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { YoutubeLoader } from "langchain/document_loaders/web/youtube";
+import fs from "fs";
+import path from "path";
 
+const saveDocsToFile = (docs: any) => {
+  // Convert the docs to a string
+  const docsString = JSON.stringify(docs);
+
+  // Generate the timestamp
+  const timestamp = new Date().toISOString().replace(/:/g, "-");
+
+  // Specify the file path
+  const fileName = `docs_${timestamp}.txt`;
+  const filePath = path.join(process.cwd(), fileName);
+
+  // Write the docs to the file
+  fs.writeFile(filePath, docsString, (err) => {
+    if (err) {
+      console.error("Error writing to file:", err);
+    } else {
+      console.log("Docs saved to file successfully");
+    }
+  });
+};
 const getVideoTranscript = async (videoId: string) => {
-
   const loader = YoutubeLoader.createFromUrl(
     `https://www.youtube.com/watch?v=${videoId}`,
     {
@@ -14,6 +35,7 @@ const getVideoTranscript = async (videoId: string) => {
   const docs = await loader.load();
 
   console.log("docs: ", docs);
+  saveDocsToFile(docs);
 
   return docs;
 };
