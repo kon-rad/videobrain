@@ -5,7 +5,7 @@ import { useAuth } from "../../lib/authContext";
 import { useState } from "react";
 import TwelveLabsApi from "../../lib/twelveLabsApi";
 import { VideoContents } from "../../components/VideoContents";
-import axios from 'axios';
+import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
@@ -82,7 +82,7 @@ const CreateSpace: NextPage = () => {
       </Head>
 
       <main className="m-4 flex flex-col">
-        <h1 className="text-2xl my-2 ">create a space</h1>
+        <h1 className="text-2xl my-2 ">Search and Summarize Video</h1>
         <div className="max-w-md flex flex-col">
           <label className="text-lg py-4">youtube url</label>
           <input
@@ -110,6 +110,14 @@ const CreateSpace: NextPage = () => {
         >
           search
         </button>
+        <h1 className="my-4 text-2xl">{video?.data?.source?.name}</h1>
+        <a
+          href={video?.data?.source?.url}
+          className="my-2 text-sm text-blue-400"
+          target="_blank"
+        >
+          {video?.data?.source?.url}
+        </a>
         <VideoContents video={video} />
       </main>
     </>
